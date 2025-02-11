@@ -1,6 +1,5 @@
 from db import db
 
-# Default user: Amir
 DEFAULT_USER = "Emil Eifrem"
 
 
