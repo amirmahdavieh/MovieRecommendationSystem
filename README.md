@@ -62,7 +62,7 @@ pip install -r requirements.txt
 ### **1️⃣ Neo4j Graph Visualization**
 The following graph structure is used in Neo4j to represent users, movies, and relationships.
 
-![Neo4j Graph](neo4j_graph.png)  
+![Neo4j Graph](user_relationship.png)  
 
 ---
 
