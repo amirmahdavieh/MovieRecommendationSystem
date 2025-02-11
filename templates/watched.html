@@ -1,0 +1,18 @@
+<!-- templates/watched.html -->
+{% extends "base.html" %}
+{% block title %}Watched Movies{% endblock %}
+{% block content %}
+<div class="container">
+  <h2 class="mb-4">Watched Movies</h2>
+  {% for movie in movies %}
+    <div class="movie-card">
+      <div class="movie-title">{{ movie.title }}</div>
+      <button class="btn btn-primary toggle-watch btn-watch" data-movie="{{ movie.title }}">
+        Watched
+      </button>
+    </div>
+  {% else %}
+    <p>No watched movies found.</p>
+  {% endfor %}
+</div>
+{% endblock %}

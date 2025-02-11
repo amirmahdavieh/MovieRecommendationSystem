@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Movie Recommendation System{% endblock %}</title>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  {% block head %}{% endblock %}
+</head>
+<body>
+  <!-- Navbar with sidebar toggle button -->
+  <nav class="navbar navbar-light bg-light">
+    <div class="container-fluid">
+      <!-- Hamburger Button to toggle sidebar -->
+      <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+        <i class="fas fa-bars"></i>
+      </button>
+      <span class="navbar-brand mb-0 h1 ms-3">MovieRec</span>
+    </div>
+  </nav>
+
+  <!-- Offcanvas Sidebar -->
+  <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasSidebarLabel"><i class="fas fa-film me-2"></i>MovieRec</h5>
+      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="nav flex-column">
+        <li class="nav-item mb-2">
+          <a class="nav-link" href="{{ url_for('friends') }}">
+            <i class="fas fa-user-friends me-2"></i>Friends
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link" href="{{ url_for('watched_movies') }}">
+            <i class="fas fa-check me-2"></i>Watched Movies
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link" href="{{ url_for('search') }}">
+            <i class="fas fa-search me-2"></i>Search for a Movie
+          </a>
+        </li>
+        <li class="nav-item mb-2">
+          <a class="nav-link" href="{{ url_for('recommendations') }}">
+            <i class="fas fa-star me-2"></i>Movie Recommendation
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="content p-4">
+    {% block content %}{% endblock %}
+  </div>
+
+  <!-- Bootstrap JS Bundle (includes Popper) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- jQuery (for AJAX calls) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    // AJAX: Toggle movie watched status
+    $(document).on('click', '.toggle-watch', function(){
+      var btn = $(this);
+      var movieTitle = btn.data('movie');
+      $.post('{{ url_for("toggle_movie_status") }}', {movie_title: movieTitle}, function(data){
+        if(data.watched){
+          btn.text('Watched');
+          btn.removeClass('btn-outline-primary').addClass('btn-primary');
+        } else {
+          btn.text('Not Watched Yet');
+          btn.removeClass('btn-primary').addClass('btn-outline-primary');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

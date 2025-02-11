@@ -1,0 +1,17 @@
+<!-- templates/friends.html -->
+{% extends "base.html" %}
+{% block title %}Your Friends{% endblock %}
+{% block content %}
+<div class="container">
+  <h2 class="mb-4">Your Friends</h2>
+  <div class="list-group">
+    {% for friend in friends %}
+      <div class="list-group-item list-group-item-action">
+        <i class="fas fa-user-friends me-2"></i>{{ friend }}
+      </div>
+    {% else %}
+      <div class="list-group-item">No friends found.</div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

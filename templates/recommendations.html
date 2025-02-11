@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Movie Recommendations{% endblock %}
+{% block content %}
+<div class="container">
+  <h2 class="mb-4">Recommended Movies</h2>
+  {% for movie in movies %}
+    <div class="movie-card d-flex justify-content-between align-items-center border border-primary rounded p-3 mb-2">
+      <div class="movie-info">
+        <div class="movie-title" style="font-size: 1.2rem; font-weight: bold;">{{ movie.title }}</div>
+        <p class="mb-0" style="font-size: 0.95rem;">Genre: {{ movie.genre }}</p>
+      </div>
+      <div class="movie-action">
+        {% if movie.watched %}
+          <button class="btn btn-primary toggle-watch btn-watch" data-movie="{{ movie.title }}">Watched</button>
+        {% else %}
+          <button class="btn btn-outline-primary toggle-watch btn-watch" data-movie="{{ movie.title }}">Not Watched Yet</button>
+        {% endif %}
+      </div>
+    </div>
+  {% else %}
+    <p>No recommendations found.</p>
+  {% endfor %}
+</div>
+{% endblock %}
