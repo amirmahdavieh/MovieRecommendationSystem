@@ -66,10 +66,9 @@ The following graph structure is used in Neo4j to represent users, movies, and r
 <img src="user_relationship.png" alt="Neo4j Graph" width="400">
 
 
----
 
 ### **2️⃣ Movie Recommendation Page**
 The system suggests movies based on **friends' activity, shared history, and popular ratings.**  
 
 <img src="recommendation_page.png" alt="Neo4j Graph" width="600">
----
+
